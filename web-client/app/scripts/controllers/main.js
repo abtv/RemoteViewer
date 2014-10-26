@@ -6,6 +6,9 @@ angular.module('webRemoteViewerApp')
             var i = image;
         }
 
+        $scope.url = 'http://localhost:8880/';
+        $scope.speed = '24';
+
         (function(timeout) {
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function() {
@@ -20,13 +23,12 @@ angular.module('webRemoteViewerApp')
             }
 
             function getImage() {
-                xhr.open('GET', 'http://localhost:8880/');
+                xhr.open('GET', $scope.url);
                 xhr.responseType = 'blob';
                 xhr.send();
 
                 setTimeout(getImage, timeout);
             }
             getImage();
-        })(200)
-
+        })(1000 / +$scope.speed)
     });

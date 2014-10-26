@@ -85,7 +85,10 @@ body {
     margin-right: auto;
     border: 1px solid #f0f0f0;
 }
-
-.main-content{
-  background-color: #1f1f1f;
+.main-content {
+    background-color: #1f1f1f;
+}
+.centered-content {
+    vertical-align: middle;
+    text-align: center;
 }
