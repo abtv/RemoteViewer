@@ -1,5 +1,6 @@
 import application.{Screenshot, IO}
 import channel.WebServer
+import org.eclipse.jetty.servlet.{ServletContextHandler, FilterHolder}
 import ui.ServerWindow
 
 object Server {
