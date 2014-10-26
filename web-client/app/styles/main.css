@@ -3,6 +3,7 @@
 body {
     padding-top: 20px;
     padding-bottom: 20px;
+    background-color: #1f1f1f;
 }
 /* Everything but the jumbotron gets side spacing for mobile first views */
 
@@ -79,7 +80,12 @@ body {
     }
 }
 .main-content-image {
-    width: 90%;
+    width: 85%;
     margin-left: auto;
     margin-right: auto;
+    border: 1px solid #f0f0f0;
+}
+
+.main-content{
+  background-color: #1f1f1f;
 }
