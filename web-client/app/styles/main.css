@@ -4,6 +4,7 @@ body {
     padding-top: 20px;
     padding-bottom: 20px;
     background-color: #1f1f1f;
+    color: #fff;
 }
 /* Everything but the jumbotron gets side spacing for mobile first views */
 
@@ -91,4 +92,5 @@ body {
 .centered-content {
     vertical-align: middle;
     text-align: center;
+    width: 100%;
 }
