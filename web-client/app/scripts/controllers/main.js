@@ -18,7 +18,7 @@ angular.module('webRemoteViewerApp')
                             var url = window.URL || window.webkitURL;
                             img.baseURI = $scope.url;
                             img.src = url.createObjectURL(self.response);
-                            setTimeout(getImage, $scope.timeout);
+                            getImage();
                         }
                     }
                     xhr.open('GET', $scope.url, true);
@@ -29,5 +29,5 @@ angular.module('webRemoteViewerApp')
                 }
             }
             getImage();
-        })()
+        })();
     });
