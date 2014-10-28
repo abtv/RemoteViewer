@@ -94,3 +94,15 @@ body {
     text-align: center;
     width: 100%;
 }
+
+.centered-content span{
+    margin: 20px;
+}
+
+.centered-content input{
+    margin: 20px;
+    color: #fff;
+    background: #1f1f1f;
+    border: none;
+    border-bottom: 1px solid #fff;
+}
