@@ -3,14 +3,13 @@
 angular.module('webRemoteViewerApp')
     .controller('MainCtrl', function($scope) {
 
-        $scope.url = 'http://localhost:8880/';
-        $scope.speed = '10';
-        $scope.timeout = 1000 / +$scope.speed;
+        $scope.url = 'http://192.168.0.101:8880/';
 
         (function() {
             function getImage() {
                 try {
                     var xhr = new XMLHttpRequest();
+
                     xhr.onreadystatechange = function() {
                         var self = this;
                         if (self.readyState == 4 && self.status == 200) {
@@ -18,14 +17,14 @@ angular.module('webRemoteViewerApp')
                             var url = window.URL || window.webkitURL;
                             img.baseURI = $scope.url;
                             img.src = url.createObjectURL(self.response);
-                            getImage();
+                            requestComplete = true;
                         }
                     }
-                    xhr.open('GET', $scope.url, true);
+                    xhr.open('GET', $scope.url);
                     xhr.responseType = 'blob';
                     xhr.send();
+                    setTimeout(getImage, 200);
                 } catch (ex) {
-
                 }
             }
             getImage();
