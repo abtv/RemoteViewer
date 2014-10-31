@@ -1,8 +1,7 @@
-package channel
+package webchannel
 
-import javax.servlet.http.HttpServletResponse
 import javax.servlet._
-import javax.inject.Singleton
+import javax.servlet.http.HttpServletResponse
 
 /**
  * Created by daynin on 26.10.14.

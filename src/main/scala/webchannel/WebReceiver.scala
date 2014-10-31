@@ -1,23 +1,27 @@
-package channel
+package webchannel
 
 import java.net.URL
 import javax.imageio.ImageIO
 
+import application.{TReceiver, Image}
 import org.joda.time.DateTime
 
-class Receiver(val address: String) {
+class WebReceiver(val address: String) extends TReceiver{
+  private val lock  = new Object()
   private var image = new Image(None, null)
 
   def getImage = {
-    synchronized(this)
+    synchronized(lock)
       image
   }
+
+  def getAddress = address
 
   private def receive() = {
     try {
       val data = ImageIO.read(new URL(address))
       if (data != null){
-        synchronized(this)
+        synchronized(lock)
           image = new Image(Some(DateTime.now()), data)
       }
     }catch{
@@ -25,7 +29,7 @@ class Receiver(val address: String) {
     }
   }
 
-  val thread = new Thread(new Runnable {
+  private val thread = new Thread(new Runnable {
     override def run(): Unit =
       while(true){
         receive()

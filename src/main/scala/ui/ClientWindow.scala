@@ -3,12 +3,12 @@ package ui
 import java.awt.image.BufferedImage
 import java.awt.{Color, Dimension, Font, GradientPaint}
 
-import channel.{Image, Receiver}
+import application.{Image, TReceiver}
 import org.joda.time.DateTime
 
 import scala.swing.{MainFrame, Panel, Swing}
 
-class ClientWindow(receiver: Receiver) extends MainFrame {
+class ClientWindow(receiver: TReceiver) extends MainFrame {
   title = "Remote viewer"
   centerOnScreen()
 
@@ -23,7 +23,7 @@ class ClientWindow(receiver: Receiver) extends MainFrame {
 
     override def paintComponent(g: java.awt.Graphics2D) {
       if (img == null){
-        val text = "Нет соединения с " + receiver.address
+        val text = "Нет соединения с " + receiver.getAddress
 
         val paint = new GradientPaint(0, 0, Color.white, size.width, 0, Color.gray)
         g.setPaint(paint)

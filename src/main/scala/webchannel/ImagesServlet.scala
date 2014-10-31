@@ -1,4 +1,4 @@
-package channel
+package webchannel
 
 import javax.servlet.annotation.WebServlet
 import javax.servlet.http.{HttpServlet, HttpServletRequest, HttpServletResponse}

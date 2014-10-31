@@ -1,4 +1,4 @@
-package channel
+package application
 
 import java.awt.image.BufferedImage
 

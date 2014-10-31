@@ -1,8 +1,9 @@
-package channel
+package webchannel
 
+import application.TServer
 import org.eclipse.jetty.servlet.{FilterHolder, ServletContextHandler, ServletHolder}
 
-class WebServer(val port: Int) {
+class WebServer(port: Int) extends TServer{
   private val server  = new org.eclipse.jetty.server.Server(port)
   private val context = new ServletContextHandler(ServletContextHandler.SESSIONS)
   context.setContextPath("/")
@@ -10,5 +11,7 @@ class WebServer(val port: Int) {
   context.addServlet(new ServletHolder(new ImagesServlet()),  "/*")
   context.addFilter(new FilterHolder(new CorsFilter()),"/*",0)
 
-  server.start
+  override def start(): Unit = server.start
+
+  override def getPort = port
 }

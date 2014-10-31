@@ -1,7 +1,7 @@
-import application.{Screenshot, IO}
-import channel.WebServer
-import org.eclipse.jetty.servlet.{ServletContextHandler, FilterHolder}
+import application.{IO, Screenshot}
+import udpchannel.UdpServer
 import ui.ServerWindow
+import webchannel.WebServer
 
 object Server {
   def main(args: Array[String]) = {
@@ -12,6 +12,9 @@ object Server {
     window.visible = true
 
     val webServer = new WebServer(port)
+    webServer.start()
+    val udpServer = new UdpServer(port)
+    udpServer.start()
 
     while(true){
       IO.put(Screenshot.capture)
