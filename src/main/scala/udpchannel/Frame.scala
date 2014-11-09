@@ -9,7 +9,7 @@ class Frame(var imageId: Int, var id: Int, var maxId: Int, var data: Array[Byte]
     imageId = ByteBuffer.wrap(buffer.take(4)).getInt
     id      = ByteBuffer.wrap(buffer.drop(4).take(4)).getInt
     maxId   = ByteBuffer.wrap(buffer.drop(8).take(4)).getInt
-    data    = buffer.drop(12).take(length)//buffer.length - 12)
+    data    = buffer.drop(12).take(length - 12)//buffer.length - 12)
   }
 
   def toBytesArray = {

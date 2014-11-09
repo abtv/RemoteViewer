@@ -13,12 +13,12 @@ class UdpServer(port: Int) extends TServer{
     try {
       val image = IO.get()
       if (image != null){
+        println(imageId + ": " + image.length)
         val frames = ArraySlicer.slice(imageId, image)
         frames.foreach(frame => {
           val buffer = frame.toBytesArray
           val packet = new DatagramPacket(buffer, buffer.length, group, 44446)
           socket.send(packet)
-          println(frame)
         })
         imageId += 1
       }

@@ -4,4 +4,4 @@ import java.awt.image.BufferedImage
 
 import org.joda.time.DateTime
 
-class Image(val loadTime: Option[DateTime], val image: BufferedImage)
+class Image(var loadTime: Option[DateTime], var image: BufferedImage)

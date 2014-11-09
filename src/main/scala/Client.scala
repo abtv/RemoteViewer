@@ -1,3 +1,4 @@
+import application.Image
 import udpchannel.UdpReceiver
 import ui.ClientWindow
 
@@ -9,7 +10,8 @@ object Client extends SimpleSwingApplication {
   val port = settings.port
   val address = s"http://$host:$port"
 
-  val receiver = new UdpReceiver(address)//new WebReceiver(address)
+  val image = new Image(None, null)
+  val receiver = new UdpReceiver(image, address)
 
-  def top = new ClientWindow(receiver)
+  def top = new ClientWindow(image, address)
 }
