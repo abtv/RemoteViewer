@@ -98,7 +98,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>Server</mainClass>
+                            <mainClass>Client</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
