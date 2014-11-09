@@ -1,7 +1,7 @@
 package udpchannel
 
 class FrameRing {
-  private val frames = new Array[Frame](256)
+  private val frames = new Array[Frame](2560)
   private var freeIndex = 0
   private var lastImageIndex = -1
 
@@ -14,6 +14,7 @@ class FrameRing {
 
   def getFrames: Array[Byte] = {
     val fullImages = frames
+      .filter(x => x != null)
       .groupBy(x => x.imageId)
       .filter(x => x._2.length > 0)
       .filter(x => x._2.length == x._2(0).maxId)

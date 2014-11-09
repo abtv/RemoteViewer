@@ -46,6 +46,11 @@
             <version>2.3</version>
         </dependency>
         <dependency>
+            <groupId>com.typesafe.akka</groupId>
+            <artifactId>akka-actor_2.11</artifactId>
+            <version>2.3.5</version>
+        </dependency>
+        <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-api</artifactId>
             <version>7.0</version>
@@ -93,7 +98,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>Client</mainClass>
+                            <mainClass>Server</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
