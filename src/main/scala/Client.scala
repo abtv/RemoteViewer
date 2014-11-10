@@ -10,7 +10,7 @@ object Client extends SimpleSwingApplication {
   val port = settings.port
   val address = s"http://$host:$port"
 
-  val image = new Image(None, null)
+  val image = new Image(-1, None, null)
   val receiver = new UdpReceiver(image, address)
 
   def top = new ClientWindow(image, address)

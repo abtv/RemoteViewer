@@ -1,11 +1,12 @@
 package ui
 
 import java.awt.image.BufferedImage
-import java.awt.{Color, Dimension, Font, GradientPaint}
+import java.awt.{Color, GradientPaint, Dimension, Font}
 
 import application.Image
 import org.joda.time.DateTime
 
+import scala.swing.event.MousePressed
 import scala.swing.{MainFrame, Panel, Swing}
 
 class ClientWindow(image: Image, address: String) extends MainFrame {
@@ -15,13 +16,27 @@ class ClientWindow(image: Image, address: String) extends MainFrame {
   maximize()
   preferredSize = new Dimension(800,600)
 
+
+
   contents = new Panel {
     var last: Option[DateTime] = None
     var img: BufferedImage = null
 
+
+    val fontSize = 16
+    val textFont = new Font("Courier", Font.BOLD, fontSize)
+
     listenTo(mouse.clicks)
 
+    var bestFit = false
+    reactions += {
+      case e: MousePressed => bestFit = !bestFit
+    }
+
     override def paintComponent(g: java.awt.Graphics2D) {
+      g.setFont(textFont)
+      g.setColor(Color.green)
+
       if (img == null){
         val text = "Нет соединения с " + address
 
@@ -29,22 +44,31 @@ class ClientWindow(image: Image, address: String) extends MainFrame {
         g.setPaint(paint)
         g.fillRect(0, 0, size.width, size.height)
 
-        g.setFont(new Font("Courier", Font.PLAIN, 16))
-        g.setColor(Color.black)
-
         val stringLen = g.getFontMetrics().getStringBounds(text, g).getWidth()
         val start = size.width/2 - stringLen/2
         g.drawString(text, start.toInt, size.height/2)
       }
       else{
-        val scalex = (size.width)/(img.getWidth.asInstanceOf[Double])
-        val scaley = (size.height)/(img.getHeight.asInstanceOf[Double])
+        g.clearRect(0, 0, size.width, size.height)
+        if (bestFit){
+          val scalex = (size.width)/(img.getWidth.asInstanceOf[Double])
+          val scaley = (size.height)/(img.getHeight.asInstanceOf[Double])
 
-        val scale = math.min(scalex, scaley)
-        val w = (scale*img.getWidth()).asInstanceOf[Int]
-        val h = (scale*img.getHeight).asInstanceOf[Int]
+          val scale = math.min(scalex, scaley)
+          val w = (scale*img.getWidth()).asInstanceOf[Int]
+          val h = (scale*img.getHeight).asInstanceOf[Int]
 
-        g.drawImage(img, (size.width - w)/2, (size.height - h)/2, w, h, null)
+          g.drawImage(img, (size.width - w)/2, (size.height - h)/2, w, h, null)
+        } else
+          g.drawImage(img, 0, 0, img.getWidth, img.getHeight, null)
+
+
+
+        val text = "Frame: " + image.imageId
+        val stringLen = g.getFontMetrics().getStringBounds(text, g).getWidth().toInt
+        val start = size.width/2 - stringLen/2
+
+        g.drawString(text, size.width - stringLen - 10, 20)
       }
     }
 

@@ -36,9 +36,8 @@ class ReceiverActor(image: Image) extends Actor{
         val buffer = frames
           .take(completedCount)
           .foldLeft(new Array[Byte](0))((acc,x) => acc ++ x)
-        println(imageId + ": " + buffer.length)
 
-
+        image.imageId = imageId
         image.loadTime = Some(DateTime.now())
         usage(new ByteArrayInputStream(buffer)){
           stream => image.image = ImageIO.read(stream)

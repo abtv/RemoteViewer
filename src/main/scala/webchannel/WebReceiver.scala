@@ -8,7 +8,7 @@ import org.joda.time.DateTime
 
 class WebReceiver(val address: String) extends TReceiver{
   private val lock  = new Object()
-  private var image = new Image(None, null)
+  private var image = new Image(-1, None, null)
 
   def getImage = {
     synchronized(lock)
@@ -22,7 +22,7 @@ class WebReceiver(val address: String) extends TReceiver{
       val data = ImageIO.read(new URL(address))
       if (data != null){
         synchronized(lock)
-          image = new Image(Some(DateTime.now()), data)
+          image = new Image(0, Some(DateTime.now()), data)
       }
     }catch{
       case ex: Exception => println("Error: " + ex.getMessage)
