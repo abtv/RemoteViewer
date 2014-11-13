@@ -14,7 +14,7 @@ object Screenshot {
 
     usage(new ByteArrayOutputStream()){
       baos =>
-        ImageIO.write(capture, "png", baos )
+        ImageIO.write(capture, "jpg", baos )
         baos.flush()
         baos.toByteArray()
     }

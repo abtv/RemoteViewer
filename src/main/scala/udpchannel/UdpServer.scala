@@ -33,7 +33,7 @@ class UdpServer(port: Int) extends TServer{
       val group = InetAddress.getByName("225.4.5.6")
       while (true) {
         send(socket, group)
-        Thread.sleep(200)
+        Thread.sleep(500)
       }
       socket.close
     }
