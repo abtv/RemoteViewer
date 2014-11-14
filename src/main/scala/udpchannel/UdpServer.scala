@@ -2,7 +2,7 @@ package udpchannel
 
 import java.net.{DatagramPacket, InetAddress, MulticastSocket}
 
-import application.{IO, TServer}
+import application.{Settings, IO, TServer}
 
 class UdpServer(port: Int) extends TServer{
   private var imageId = 0
@@ -17,7 +17,7 @@ class UdpServer(port: Int) extends TServer{
         val frames = ArraySlicer.slice(imageId, image)
         frames.foreach(frame => {
           val buffer = frame.toBytesArray
-          val packet = new DatagramPacket(buffer, buffer.length, group, 44446)
+          val packet = new DatagramPacket(buffer, buffer.length, group, Settings.multicastPort)
           socket.send(packet)
         })
         imageId += 1
@@ -30,10 +30,10 @@ class UdpServer(port: Int) extends TServer{
   private val thread = new Thread(new Runnable {
     override def run(): Unit = {
       val socket = new MulticastSocket()
-      val group = InetAddress.getByName("225.4.5.6")
+      val group = InetAddress.getByName(Settings.multicastAddress)
       while (true) {
         send(socket, group)
-        Thread.sleep(500)
+        Thread.sleep(Settings.serverSendTimeout)
       }
       socket.close
     }

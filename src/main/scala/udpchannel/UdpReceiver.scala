@@ -3,7 +3,7 @@ package udpchannel
 import java.net.{DatagramPacket, InetAddress, MulticastSocket}
 
 import akka.actor.{ActorSystem, Props}
-import application.Image
+import application.{Settings, Image}
 
 class UdpReceiver(image: Image, address: String) {
   private val system = ActorSystem("MySystem")
@@ -26,10 +26,10 @@ class UdpReceiver(image: Image, address: String) {
 
   private val thread = new Thread(new Runnable {
     override def run(): Unit ={
-      val socket = new MulticastSocket(44446)
+      val socket = new MulticastSocket(Settings.multicastPort)
       socket.setReceiveBufferSize(8*1024*1024)
       socket.setSoTimeout(10000)
-      val groupAddress = InetAddress.getByName("225.4.5.6")
+      val groupAddress = InetAddress.getByName(Settings.multicastAddress)
       socket.joinGroup(groupAddress)
 
       while(true)

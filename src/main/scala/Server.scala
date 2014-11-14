@@ -18,7 +18,7 @@ object Server {
 
     while(true){
       IO.put(Screenshot.capture)
-      Thread.sleep(200)
+      Thread.sleep(application.Settings.screenShotTimeout)
     }
   }
 }
