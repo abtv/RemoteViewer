@@ -3,20 +3,18 @@ package ui
 import java.awt.image.BufferedImage
 import java.awt.{Color, GradientPaint, Dimension, Font}
 
-import application.Image
+import application.{Settings, Image}
 import org.joda.time.DateTime
 
 import scala.swing.event.MousePressed
 import scala.swing.{MainFrame, Panel, Swing}
 
-class ClientWindow(image: Image, address: String) extends MainFrame {
+class ClientWindow(image: Image) extends MainFrame {
   title = "Remote viewer"
   centerOnScreen()
 
   maximize()
   preferredSize = new Dimension(800,600)
-
-
 
   contents = new Panel {
     var last: Option[DateTime] = None
@@ -38,7 +36,7 @@ class ClientWindow(image: Image, address: String) extends MainFrame {
       g.setColor(Color.green)
 
       if (img == null){
-        val text = "Нет соединения с " + address
+        val text = "Нет соединения с " + Settings.multicastAddress
 
         val paint = new GradientPaint(0, 0, Color.white, size.width, 0, Color.gray)
         g.setPaint(paint)

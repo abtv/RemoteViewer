@@ -4,10 +4,8 @@ import java.net.{DatagramPacket, InetAddress, MulticastSocket}
 
 import application.{Settings, IO, TServer}
 
-class UdpServer(port: Int) extends TServer{
+class UdpServer() extends TServer{
   private var imageId = 0
-
-  override def getPort = port
 
   private def send(socket: MulticastSocket, group: InetAddress) = {
     try {

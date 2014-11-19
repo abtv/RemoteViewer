@@ -5,15 +5,10 @@ import webchannel.WebServer
 
 object Server {
   def main(args: Array[String]) = {
-    val settings = Settings.loadSettings()
-    val port = settings.port
-
-    val window = new ServerWindow(port.toString)
+    val window = new ServerWindow()
     window.visible = true
 
-    val webServer = new WebServer(port)
-    webServer.start()
-    val udpServer = new UdpServer(port)
+    val udpServer = new UdpServer()
     udpServer.start()
 
     while(true){

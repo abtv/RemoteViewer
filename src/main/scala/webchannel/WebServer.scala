@@ -12,6 +12,4 @@ class WebServer(port: Int) extends TServer{
   context.addFilter(new FilterHolder(new CorsFilter()),"/*",0)
 
   override def start(): Unit = server.start
-
-  override def getPort = port
 }

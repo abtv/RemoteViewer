@@ -3,9 +3,11 @@ package ui
 import java.awt.image.BufferedImage
 import java.awt.{Color, Dimension, Font, GradientPaint}
 
+import application.Settings
+
 import scala.swing.{MainFrame, Panel}
 
-class ServerWindow(address: String) extends MainFrame {
+class ServerWindow() extends MainFrame {
   title = "Remote server"
   preferredSize = new Dimension(320, 240)
   centerOnScreen()
@@ -15,7 +17,7 @@ class ServerWindow(address: String) extends MainFrame {
 
     override def paintComponent(g: java.awt.Graphics2D) {
       if (img == null) {
-        val text = s"Сервер запущен на $address"
+        val text = "Сервер запущен на " + Settings.multicastAddress
 
         val paint = new GradientPaint(0, 0, Color.white, size.width, 0, Color.gray)
         g.setPaint(paint)
